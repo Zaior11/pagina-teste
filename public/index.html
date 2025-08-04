@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Império Invisível - Página de Vendas</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+        /* Igual ao seu CSS original... */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #EAEAEA;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'EB Garamond', serif;
+        }
+        .bg-creme {
+            background-color: #F5F5DC;
+        }
+        .text-creme {
+            color: #F5F5DC;
+        }
+        .border-creme {
+            border-color: #F5F5DC;
+        }
+        .bg-preto-fundo {
+            background-color: #121212;
+        }
+        .bg-preto-secao {
+            background-color: #1a1a1a;
+        }
+        .text-preto-secao {
+            color: #1a1a1a;
+        }
+        @keyframes subtle-glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(245, 245, 220, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(245, 245, 220, 0.4);
+            }
+        }
+        .cta-button:hover {
+            animation: subtle-glow 2s infinite;
+        }
+        #chat-output p {
+            margin-bottom: 1rem;
+        }
+        .user-message {
+            text-align: right;
+        }
+        .user-message p {
+            background-color: #F5F5DC;
+            color: #1a1a1a;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 10px 10px 0 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .ai-message p {
+            background-color: #2a2a2a;
+            color: #EAEAEA;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 10px 10px 10px 0;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #F5F5DC;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body class="bg-preto-fundo">
+
+    <!-- Cabeçalho e seções conforme seu HTML original -->
+
+    <header class="text-center py-16 px-6 bg-preto-secao border-b border-white/10">
+        <div class="container mx-auto max-w-4xl">
+            <img src="https://i.imgur.com/B7M2a5m.png" alt="Logo Império Invisível" class="mx-auto w-48 h-48 md:w-56 md:h-56" />
+            <h1 class="text-4xl md:text-6xl font-bold text-creme mt-8">Construa seu Império Silenciosamente.</h1>
+            <h2 class="text-2xl md:text-3xl font-serif text-white/80 mt-4">
+                A Dominação Digital Começa com a Nossa IA Embutida.
+            </h2>
+            <p class="mt-6 text-lg max-w-2xl mx-auto text-white/70">
+                Descubra e aplique as estratégias que operam nas sombras do mercado, invisíveis para a concorrência, mas devastadoramente eficazes.
+            </p>
+            <a href="#oferta" class="cta-button inline-block bg-creme text-preto-secao font-bold text-xl py-4 px-12 rounded-sm mt-10 shadow-lg transition-transform transform hover:scale-105">
+                Obter Acesso Exclusivo
+            </a>
+        </div>
+    </header>
+
+    <!-- (As demais seções iguais ao que você enviou, mantendo tudo igual, omitidas aqui por brevidade) -->
+
+    <!-- Seção chat -->
+
+    <section class="py-20 px-6 bg-preto-secao">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-3xl font-serif font-bold text-creme text-center mb-4">Seu Conselheiro Imperial</h2>
+            <p class="text-center text-white/70 mb-12">Tem alguma dúvida? Pergunte diretamente ao nosso estratega de IA.</p>
+
+            <div class="bg-preto-fundo p-6 rounded-sm border border-white/20 flex flex-col">
+                <div id="chat-output" class="h-64 overflow-y-auto mb-4 pr-2">
+                    <div class="ai-message">
+                        <p>Saudações, futuro imperador. Em que posso ajudá-lo a dominar o seu mercado hoje?</p>
+                    </div>
+                </div>
+                <div id="loading-indicator" class="hidden mb-4">
+                    <div class="ai-message">
+                        <p><span class="loader"></span></p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <input type="text" id="chat-input" class="flex-grow bg-black/20 border border-white/30 rounded-sm p-3 text-white focus:outline-none focus:border-creme" placeholder="Digite sua pergunta aqui..." aria-label="Campo para digitar pergunta" />
+                    <button id="send-btn" class="bg-creme text-preto-secao font-bold px-6 rounded-sm hover:bg-white transition-colors" aria-label="Enviar mensagem">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer conforme seu original -->
+
+    <footer class="text-center py-8 px-6 border-t border-white/10">
+        <div class="container mx-auto">
+            <p class="text-white/50">&copy; 2025 - Império Invisível. Todos os direitos reservados. A dominação é uma arte.</p>
+            <div class="mt-4 text-sm text-white/40">
+                <a href="#" class="hover:text-creme mx-2">Políticas de Privacidade</a> |
+                <a href="#" class="hover:text-creme mx-2">Termos de Uso</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const chatOutput = document.getElementById('chat-output');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const loadingIndicator = document.getElementById('loading-indicator');
+
+        const productInfo = `
+Você é um assistente de IA especialista no produto "Império Invisível".
+Seu nome é "Conselheiro Imperial".
+Responda às perguntas de forma direta, profissional e usando a temática de "império", "estratégia", "dominação", "segredos".
+Se a pergunta não for sobre o produto, responda que seu único propósito é revelar os segredos do "Império Invisível".
+
+Aqui estão as informações sobre o produto:
+- Nome do Produto: Império Invisível.
+- Preço: R$ 14,90. É um pagamento único, não é uma assinatura. Garante acesso vitalício.
+- O que é: É uma ferramenta de software com IA embutida que analisa o mercado para encontrar oportunidades e estratégias ocultas que a concorrência não vê.
+- Principais funcionalidades: Análise Oculta (encontra tendências), Estratégia Letal (cria planos de ação), Automação Inteligente (automatiza pesquisa).
+- Como o acesso é entregue: O acesso é online, enviado por e-mail imediatamente após a confirmação do pagamento.
+- Garantia: 7 dias de garantia incondicional. Se o cliente não gostar, pode pedir o reembolso total.
+- Pagamento: O pagamento é 100% seguro.
+`;
+
+        async function getAIResponse(userQuestion) {
+            loadingIndicator.classList.remove('hidden');
+            sendBtn.disabled = true;
+            chatInput.disabled = true;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+
+            try {
+                // Chamada ao backend proxy que você vai criar e hospedar
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        question: userQuestion,
+                        context: productInfo
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erro na API backend: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                let aiText = data.answer || 
+                    "Desculpe, não consegui processar sua pergunta no momento. Tente novamente.";
+
+                appendMessage(aiText, 'ai-message');
+
+            } catch (error) {
+                console.error('Erro ao chamar backend:', error);
+                appendMessage("Meu império está enfrentando uma pequena instabilidade. Por favor, tente novamente em alguns instantes.", 'ai-message');
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                sendBtn.disabled = false;
+                chatInput.disabled = false;
+                chatOutput.scrollTop = chatOutput.scrollHeight;
+            }
+        }
+
+        function appendMessage(text, className) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = className;
+            const messageP = document.createElement('p');
+            messageP.textContent = text;
+            messageDiv.appendChild(messageP);
+            chatOutput.appendChild(messageDiv);
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+
+        function handleSend() {
+            const question = chatInput.value.trim();
+            if (question === '') return;
+            appendMessage(question, 'user-message');
+            chatInput.value = '';
+            getAIResponse(question);
+        }
+
+        sendBtn.addEventListener('click', handleSend);
+        chatInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                handleSend();
+            }
+        });
+    </script>
+
+</body>
+</html>
