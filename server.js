@@ -19,13 +19,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/api/chat', async (req, res) => {
   try {
+    console.log('Recebido no backend:', req.body);
+
     const { question, context } = req.body;
 
     if (!question) {
+      console.log('Sem pergunta no corpo da requisição');
       return res.status(400).json({ error: 'Pergunta é obrigatória' });
     }
 
     const promptText = context ? `${context}\n\nPergunta do usuário: ${question}` : question;
+    console.log('Prompt gerado:', promptText);
 
     const payload = {
       prompt: {
@@ -36,18 +40,24 @@ app.post('/api/chat', async (req, res) => {
       maxOutputTokens: 300
     };
 
+    console.log('Payload enviado para a API Gemini:', JSON.stringify(payload, null, 2));
+
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
 
+    console.log('Status da resposta da API:', response.status);
+
     if (!response.ok) {
       const errorText = await response.text();
+      console.log('Erro da API:', errorText);
       return res.status(response.status).json({ error: errorText });
     }
 
     const result = await response.json();
+    console.log('Resposta da API Gemini:', JSON.stringify(result, null, 2));
 
     let answer = "Desculpe, não consegui processar sua pergunta.";
 
